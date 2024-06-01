@@ -11,7 +11,8 @@ module.exports = {
         'danger': '#e3342f',
       }),
       colors: {
-        customHover: '#05DDDD',
+        primary: '#05DDDD',
+        secondary: '#024873',
       },
       extend: {
         fontFamily:{

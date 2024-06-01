@@ -3,7 +3,7 @@
     <SideBarGlobal class="w-1/5"/>
     <div class="flex flex-col w-4/5">
       <NavbarGlobal/>
-      <div class="flex-grow bg-gray-100 p-4">
+      <div class="flex-grow p-4">
         <router-view/>
       </div>
     </div>

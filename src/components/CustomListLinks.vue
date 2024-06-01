@@ -1,6 +1,8 @@
 <template>
-    <div class="hover:text-customHover" v-for="link in listLinks" :key="link.to">
-        <router-link :to="{name:link.to}">{{link.name}}</router-link>
+    <div class="hover:text-primary active:text-primary" v-for="link in listLinks" :key="link.to">
+        <router-link class="text-xl" v-slot="{isActive}" :to="{name:link.to}">
+            <a :class="isActive ? 'active-link':''">{{link.name}}</a>
+        </router-link>
     </div>
 </template>
 
@@ -12,7 +14,7 @@ export default {
             listLinks: ref([
                 {
                     to:'home',
-                    name:"Home"
+                    name:"Dashboard"
                 },
                 {
                     to:'products',
