@@ -1,9 +1,9 @@
 <template>
-  <div class="flex h-screen">
-    <SideBarGlobal class="w-1/5"/>
-    <div class="flex flex-col w-4/5">
+  <div class="flex h-screen overflow-hidden">
+    <SideBarGlobal class="hidden md:w-1/6 md:block"/>
+    <div class="flex flex-col w-full md:w-5/6">
       <NavbarGlobal/>
-      <div class="flex-grow p-4">
+      <div class="flex-grow p-2 flex flex-col items-center justify-start overflow-auto">
         <router-view/>
       </div>
     </div>

@@ -12,9 +12,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /**Icons */
-import { faBars, faMoon, faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faMoon, faAngleDown, faChartLine, faTableList, faFilter, faBan, faPenToSquare, faFileCsv, faDownload, faChevronCircleLeft, faChevronCircleRight } from '@fortawesome/free-solid-svg-icons'
+import { faFileExcel, faFilePdf, faCircleLeft } from '@fortawesome/free-regular-svg-icons'
 
-library.add(faBars, faMoon, faAngleDown)
+library.add(faBars, faMoon, faAngleDown, faChartLine, faTableList, faFilter, faBan, faPenToSquare, faFileExcel, faFilePdf, faFileCsv, faDownload, faChevronCircleLeft, faChevronCircleRight, faCircleLeft)
 
 
 createApp(App)

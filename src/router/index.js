@@ -27,4 +27,12 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.path === '/products') {
+      next({ name: 'list-product' });
+  } else {
+      next();
+  }
+});
+
 export default router

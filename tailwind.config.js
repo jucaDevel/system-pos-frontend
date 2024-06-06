@@ -13,6 +13,8 @@ module.exports = {
       colors: {
         primary: '#05DDDD',
         secondary: '#024873',
+        secondaryLight: '#0270B4',
+        neutralLight: '#C3C3C3'
       },
       extend: {
         fontFamily:{

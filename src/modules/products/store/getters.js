@@ -1,3 +1,4 @@
-// export const myGetter = (state) => {
-    // return state
-// }
+
+export const getProducts = (state) => {
+    return state.products
+}

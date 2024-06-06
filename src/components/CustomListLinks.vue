@@ -1,6 +1,7 @@
 <template>
-    <div class="hover:text-primary active:text-primary" v-for="link in listLinks" :key="link.to">
-        <router-link class="text-xl" v-slot="{isActive}" :to="{name:link.to}">
+    <div class="hover:text-neutralLight active:text-primary" v-for="link in listLinks" :key="link.to">
+        <router-link class="text-lg flex gap-6 flex-wrap content-center" v-slot="{isActive}" :to="{name:link.to}">
+            <font-awesome-icon :icon="[link.icon[0], link.icon[1]]" size="lg" :class="isActive ? 'active-link':''" />
             <a :class="isActive ? 'active-link':''">{{link.name}}</a>
         </router-link>
     </div>
@@ -14,11 +15,13 @@ export default {
             listLinks: ref([
                 {
                     to:'home',
-                    name:"Dashboard"
+                    name:"Dashboard",
+                    icon:['fas','chart-line']
                 },
                 {
                     to:'products',
-                    name:"Productos"
+                    name:"Productos",
+                    icon:['fas','table-list']
                 },
             ])
         }
