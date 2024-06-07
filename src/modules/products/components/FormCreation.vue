@@ -64,7 +64,6 @@
 <script>
 export default {
     setup(props, {attrs}){
-        console.log(attrs.dataFields);
         return{
            dataFields:attrs.dataFields
         }

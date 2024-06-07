@@ -8,22 +8,34 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import useLanguage from '@/utils/composables/useLanguage'
 export default {
     setup(){
+       const { languageChanged, getCurrentLanguage } = useLanguage()
+        const listLinks =  ref([])
+
+        watch(
+            ()=> languageChanged.value,
+            () => {
+                const languagei18n = getCurrentLanguage()
+                listLinks.value = [
+                    {
+                        to:'home',
+                        name:languagei18n('modules.DASHBOARD'),
+                        icon:['fas','chart-line']
+                    },
+                    {
+                        to:'products',
+                        name:languagei18n('modules.PRODUCTS'),
+                        icon:['fas','table-list']
+                    },
+                ]   
+            },
+            { immediate: true }
+        )
         return{
-            listLinks: ref([
-                {
-                    to:'home',
-                    name:"Dashboard",
-                    icon:['fas','chart-line']
-                },
-                {
-                    to:'products',
-                    name:"Productos",
-                    icon:['fas','table-list']
-                },
-            ])
+            listLinks
         }
     }
 }
