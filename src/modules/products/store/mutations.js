@@ -8,3 +8,7 @@ export const setProducts = (state, dataProducts) => {
         state.isProductsLoaded = true
     }
 }
+
+export const setFields = (state, dataFields) => {
+   state.fieldsForm = {...state.fieldsForm, dataFields}
+}

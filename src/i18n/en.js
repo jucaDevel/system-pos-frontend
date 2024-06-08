@@ -13,7 +13,7 @@ export default {
         INHABILITATE: "Inhabilite",
         THEME: "Theme"
     },
-    headerTables:{
+    nameFields:{
         BAR_CODE: "Bar Code",
         DESCRIPTION: "Description",
         ID_CATEGORY: "Category",

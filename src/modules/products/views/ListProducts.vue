@@ -1,7 +1,5 @@
 <template>
-  <div v-if="isLoading">
-    <h1>Cargando...</h1>
-  </div>
+  <LoaderProgress v-if="isLoading"/>
   <template v-else>
     <data-table :allValues="products" :allKeys="allKeys">
       <template v-slot:title>
@@ -27,7 +25,8 @@ import getKeysFromArray from '@/utils/helpers/getKeysFromArray'
 import { useI18n } from 'vue-i18n'
 export default {
   components: {
-    DataTable: defineAsyncComponent(()=> import('@/components/DataTable.vue'))
+    DataTable: defineAsyncComponent(()=> import('@/components/DataTable.vue')),
+    LoaderProgress: defineAsyncComponent(() => import('@/components/LoaderProgress'))
   },
   setup(){
     const {t} = useI18n()

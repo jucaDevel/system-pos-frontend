@@ -1,9 +1,6 @@
 <template>
     <div class="flex flex-row items-left mb-3 py-5 w-full justify-between">
-        <div class="flex flex-row gap-3 justify-start items-center">
-            <font-awesome-icon :icon="['far', 'circle-left']" size="2xl" class="text-secondary cursor-pointer" :title="languagei18n('common.GO_BACK_SENTECE')"/>
-            <h1>{{languagei18n('common.GO_BACK_SENTECE')}}</h1>
-        </div>
+        <ButtonBackCustom />
         <div class="flex flex-row gap-3 justify-start items-center">
             <h1>Gestores > Productos </h1>
         </div>
@@ -15,7 +12,11 @@
 
 <script>
 import { useI18n } from 'vue-i18n'
+import ButtonBackCustom from '@/components/ButtonBackCustom.vue'
 export default {
+    components:{
+        ButtonBackCustom
+    },
     setup(){
         const { t } = useI18n()
 

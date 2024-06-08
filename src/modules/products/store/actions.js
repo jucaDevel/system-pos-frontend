@@ -13,7 +13,7 @@ export const saveProduct = async({commit},dataProduct) => {
 
 export const setProducts = async({commit}) => {
     const dataProducts = await loadProducts()
-
+    
     if (!dataProducts) {
         commit('setProducts',[])
     }
@@ -24,6 +24,7 @@ export const setProducts = async({commit}) => {
             id,
             ...dataProducts[id]
         })
-    }    
+    }
+
     commit('setProducts',products)
 }

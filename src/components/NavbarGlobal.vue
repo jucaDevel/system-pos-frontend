@@ -1,9 +1,9 @@
 <template>
     <div class="w-full p-3 h-16 md:h-16 flex justify-between align-center shadow-lg">
-        <div class="cursor-pointer flex-wrap content-center">
+        <div class="cursor-pointer flex-wrap content-center h-5">
             <font-awesome-icon :icon="['fas', 'bars']" size="2xl" style="color: #024873;" />
         </div>
-        <div class="flex flex-wrap content-center gap-5">   
+        <div class="flex flex-wrap content-center gap-2 md:gap-5 lg:gap-5">
             <select
               class="hover:text-secondaryLight border-2 rounded p-2"
               @change="changeLocaleLanguage"
@@ -14,9 +14,9 @@
             <div class="cursor-pointer flex flex-wrap content-center">
                 <font-awesome-icon :icon="['fas', 'moon']" size="2xl" class="text-secondary" :title="t('common.THEME')"/>
             </div>
-            <div class=" h-full flex justify-between mx-5">
+            <div class=" h-full flex justify-between mx-2 lg:mx-5">
                 <img class="h-full rounded-full" alt="User Image" src="@/assets/images/no-user.png">
-                <div class="mx-5 flex flex-wrap content-center gap-2 cursor-pointer hover:text-secondaryLight">
+                <div class="mx-5 flex flex-wrap content-center md:gap-2 cursor-pointer hover:text-secondaryLight">
                     <span>Juan</span>
                     <div>
                         <font-awesome-icon :icon="['fas', 'angle-down']" />
@@ -47,7 +47,6 @@ export default {
             }
         )
         const changeLocaleLanguage = () =>{
-            console.log(language.value);
             emit('on:changeLanguage', language.value)
         }
         return{

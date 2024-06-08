@@ -13,7 +13,7 @@ export default {
         INHABILITATE: "Inhabilitar",
         THEME: "Tema"
     },
-    headerTables:{
+    nameFields:{
         BAR_CODE: "Codigo de barras",
         DESCRIPTION: "Descripción",
         ID_CATEGORY: "Categoría",

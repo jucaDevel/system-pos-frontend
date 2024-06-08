@@ -1,31 +1,37 @@
 <template>
   <h1>Crear producto</h1>
   <div class="block h-80 w-full overflow-y-auto">
-    <FormCreation :dataFields="dataFields"/>
+    <CustomForm :dataFields="dataFields" @on:saveRegister="createProduct" />
   </div>
 </template>
 
 <script>
-// import { ref } from "vue";
-import useCreateProduct from "@/modules/products/composables/useCreateProduct";
-import FormCreation from '../components/FormCreation'
+import { useStore } from "vuex";
+import CustomForm from "@/components/CustomForm";
+import dataFields from "@/utils/fields";
 export default {
-  components:{
-    FormCreation
+  components: {
+    CustomForm,
   },
   setup() {
-    const { dataFields,createProduct } = useCreateProduct()
+    const store = useStore();
+    const createProduct = async (dataFields) => {
+      try {
+        const objectParams = {
+          ...dataFields,
+          status: 1,
+        };
 
-    const preventSubmitOnEnter = (event) => {
-      if (event.key === "Enter") {
-        event.preventDefault();
+        await store.dispatch("productStore/saveProduct", objectParams);
+      } catch (error) {
+        console.log(error);
       }
     };
-    return {
-        dataFields,
 
-        createProduct,
-        preventSubmitOnEnter
+    return {
+      dataFields,
+
+      createProduct,
     };
   },
 };
