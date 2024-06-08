@@ -3,7 +3,7 @@
     <div class="flex flex-row items-center">
       <slot name="title" />
       <span class="mx-4 bg-primary bg-opacity-40 px-3 rounded-lg">{{
-        allValues.length
+        paginatedValues.length
       }}</span>
       <slot name="button-create" />
     </div>
@@ -58,13 +58,13 @@
           <th class="p-2 text-left">{{languagei18n('nameFields.ACTIONS')}}</th>
         </thead>
         <tbody class="">
-          <tr v-for="product in valuesPerPage" :key="product.id">
+          <tr v-for="value in paginatedValues" :key="value.id">
             <td
               class="border-b-2 p-2 text-left"
-              v-for="value in titles"
-              :key="value"
+              v-for="title in titles"
+              :key="title"
             >
-              {{ product[value] }}
+              {{ value[title] }}
             </td>
             <td class="border-b-2 p-2">
               <div class="flex flex-row items-center justify-between">
@@ -72,6 +72,7 @@
                   :icon="['fas', 'pen-to-square']"
                   class="mx-2 bg-primary rounded w-full p-1 cursor-pointer text-white"
                   :title="languagei18n('common.EDIT')"
+                  @click="onUpdateRegister(value.id)"
                 />
                 <font-awesome-icon
                   :icon="['fas', 'ban']"
@@ -134,7 +135,6 @@
 import {ref, watch} from 'vue'
 import usePaginator from '@/utils/composables/usePaginator'
 import { useI18n } from "vue-i18n";
-import stringSimilarity from 'string-similarity'
 export default {
   props:{
     allKeys:{
@@ -146,10 +146,9 @@ export default {
       required: true
     }
   },
-  setup(props) {
+  setup(props, {emit}) {
     const { t:languagei18n } = useI18n()
     const searchValue = ref(null)
-
     /** Se usa composable para simplificar el componente*/
     const {
       columnsPerPageOptions,
@@ -158,29 +157,21 @@ export default {
       columnsPerPage,
       paginatedValues,
       prevPage,
-      nextPage
+      nextPage,
+      filterData
     } = usePaginator(props.allValues)
 
-    const valuesPerPage = ref(paginatedValues)
-
+    // const valuesPerPage = ref(props.allValues)
     watch(
       searchValue,
       (newSearhValue) => {
-        const valuesFinal = []
-        valuesPerPage.value.forEach(valArray => {
-          for (const key in valArray) {
-            const valueToCompare = String(valArray[key])
-            const similiraty = stringSimilarity.compareTwoStrings(valueToCompare, newSearhValue)
-            if(similiraty > 0 && !valuesFinal.includes(valArray['id'])){
-              valuesFinal.push(valArray)
-            }
-          }
-        });
-
-        console.log(valuesFinal);
-        valuesPerPage.value = valuesFinal
+        filterData(newSearhValue)
       }
     )
+
+    const onUpdateRegister = (idValue) => {
+      emit('on:updateRegister', idValue)
+    }
 
     return {
       languagei18n,
@@ -190,10 +181,11 @@ export default {
       columnsPerPage,
       searchValue,
 
-      valuesPerPage,
+      paginatedValues,
       titles: props.allKeys,
       prevPage,
-      nextPage
+      nextPage,
+      onUpdateRegister
     };
   },
 };

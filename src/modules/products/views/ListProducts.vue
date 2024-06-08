@@ -1,7 +1,11 @@
 <template>
   <LoaderProgress v-if="isLoading"/>
   <template v-else>
-    <data-table :allValues="products" :allKeys="allKeys">
+    <data-table
+      :allValues="products"
+      :allKeys="allKeys"
+      @on:updateRegister="updateProduct"
+      >
       <template v-slot:title>
         <h4 class="font-semibold text-lg">{{languagei18n('products.TITLE')}}</h4>
       </template>
@@ -49,10 +53,16 @@ export default {
         isLoading.value = false
       }
     }, { immediate: true })
+
+    const updateProduct = (idProduct) => {
+      router.push({ name: 'update-product', params: { idProduct } });
+    }
+    
     return{
         languagei18n: t,
 
         openModalProduct: () => { router.push({name:'creation-product'}) },
+        updateProduct,
 
         products,
         allKeys,
@@ -61,6 +71,3 @@ export default {
   }
 };
 </script>
-
-<style>
-</style>

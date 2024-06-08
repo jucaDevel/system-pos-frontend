@@ -15,6 +15,12 @@ export default {
             path:'creation',
             name:'creation-product',
             component: () => import('@/modules/products/views/CreationProduct.vue')
-        }        
+        },
+        {
+            path:'update/:idProduct',
+            name:'update-product',
+            component: () => import('@/modules/products/views/UpdateProduct.vue'),
+            props: true
+        }
     ]
 }

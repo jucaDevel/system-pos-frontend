@@ -7,6 +7,7 @@
 
 <script>
 import { useStore } from "vuex";
+import { useRouter } from 'vue-router'
 import CustomForm from "@/components/CustomForm";
 import dataFields from "@/utils/fields";
 export default {
@@ -14,7 +15,8 @@ export default {
     CustomForm,
   },
   setup() {
-    const store = useStore();
+    const store = useStore()
+    const router = useRouter()
     const createProduct = async (dataFields) => {
       try {
         const objectParams = {
@@ -23,6 +25,7 @@ export default {
         };
 
         await store.dispatch("productStore/saveProduct", objectParams);
+        router.push({name:'list-product'})
       } catch (error) {
         console.log(error);
       }
@@ -36,6 +39,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>
