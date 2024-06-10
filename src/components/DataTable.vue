@@ -78,6 +78,7 @@
                   :icon="['fas', 'ban']"
                   class="mx-2 bg-red-600 rounded w-full p-1 cursor-pointer text-white"
                   :title="languagei18n('common.INHABILITATE')"
+                  @click="onDeleteRegister(value.id)"
                 />
               </div>
             </td>
@@ -173,6 +174,10 @@ export default {
       emit('on:updateRegister', idValue)
     }
 
+    const onDeleteRegister = (idValue) => {
+      emit('on:deleteRegister', idValue)
+    }
+
     return {
       languagei18n,
       columnsPerPageOptions,
@@ -185,7 +190,8 @@ export default {
       titles: props.allKeys,
       prevPage,
       nextPage,
-      onUpdateRegister
+      onUpdateRegister,
+      onDeleteRegister
     };
   },
 };

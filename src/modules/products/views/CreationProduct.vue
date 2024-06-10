@@ -9,7 +9,8 @@
 import { useStore } from "vuex";
 import { useRouter } from 'vue-router'
 import CustomForm from "@/components/CustomForm";
-import dataFields from "@/utils/fields";
+import { computed } from 'vue';
+
 export default {
   components: {
     CustomForm,
@@ -17,6 +18,7 @@ export default {
   setup() {
     const store = useStore()
     const router = useRouter()
+    const dataFields = computed(()=> JSON.parse(JSON.stringify(store.getters['productStore/getFields'])))
     const createProduct = async (dataFields) => {
       try {
         const objectParams = {

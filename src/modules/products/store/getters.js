@@ -6,3 +6,7 @@ export const getProducts = (state) => {
 export const getProductById = (state) => (id = '') => {
     return state.products.find((product) => product.id === id)
 }
+
+export const getFields = (state) => {
+    return state.fieldsForm
+}

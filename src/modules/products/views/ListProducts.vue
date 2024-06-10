@@ -5,6 +5,7 @@
       :allValues="products"
       :allKeys="allKeys"
       @on:updateRegister="updateProduct"
+      @on:deleteRegister="deleteProduct"
       >
       <template v-slot:title>
         <h4 class="font-semibold text-lg">{{languagei18n('products.TITLE')}}</h4>
@@ -26,6 +27,7 @@ import { onMounted, watch, ref, defineAsyncComponent } from 'vue'
 import {useRouter} from 'vue-router'
 import {useStore} from 'vuex'
 import getKeysFromArray from '@/utils/helpers/getKeysFromArray'
+import dataFields from "@/utils/fields";
 import { useI18n } from 'vue-i18n'
 export default {
   components: {
@@ -41,6 +43,7 @@ export default {
     const isLoading = ref(true)
     const getProducts = async () => {
         await store.dispatch('productStore/setProducts')
+        await store.dispatch('productStore/setFields', dataFields)
         products.value = store.getters['productStore/getProducts']
     }
     onMounted(() => {
@@ -57,12 +60,17 @@ export default {
     const updateProduct = (idProduct) => {
       router.push({ name: 'update-product', params: { idProduct } });
     }
+
+    const deleteProduct = async (idProduct) => {
+      await store.dispatch('productStore/deleteProduct',idProduct)
+    }
     
     return{
         languagei18n: t,
 
         openModalProduct: () => { router.push({name:'creation-product'}) },
         updateProduct,
+        deleteProduct,
 
         products,
         allKeys,

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import {ref} from 'vue'
+import {onMounted, ref} from 'vue'
 import CustomFieldForm from '@/components/CustomFieldForm.vue'
 export default {
     components:{
@@ -31,12 +31,12 @@ export default {
     },
     props:{
       dataFields: {
-        type: Object,
+        type: Array,
         required: true
       }
     },
     setup(props, { emit }){
-      const {value:localDataFields} = ref({...props.dataFields})
+      const {value:localDataFields} = ref([...props.dataFields])
       const formValues = ref({})
 
       const updateFormValue = ({ name, value }) => {
@@ -46,6 +46,16 @@ export default {
       const saveRegister = () => {
         emit('on:saveRegister',formValues.value)
       }
+
+      onMounted( () => {
+        localDataFields.forEach(field => {
+          if (field.value) {
+            formValues.value[field.name] = field.value;
+          }
+        });
+
+        console.log(formValues.value);
+      })
 
       return{
         localDataFields,
