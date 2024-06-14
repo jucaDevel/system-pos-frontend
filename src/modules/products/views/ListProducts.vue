@@ -12,7 +12,7 @@
       </template>
       <template v-slot:button-create>
         <button
-          class="bg-primary p-2 rounded text-white"
+          class="bg-primary p-2 rounded text-white dark:bg-primaryDark"
           @click="openModalProduct"
         >
           {{languagei18n('products.BTN_CREATE')}}
@@ -23,12 +23,13 @@
 </template>
 
 <script>
-import { onMounted, watch, ref, defineAsyncComponent } from 'vue'
+import { defineAsyncComponent } from 'vue'
 import {useRouter} from 'vue-router'
-import {useStore} from 'vuex'
+// import {useStore} from 'vuex'
 import getKeysFromArray from '@/utils/helpers/getKeysFromArray'
 import dataFields from "@/utils/fields";
 import { useI18n } from 'vue-i18n'
+import useGestor from '@/utils/composables/useGestor'
 export default {
   components: {
     DataTable: defineAsyncComponent(()=> import('@/components/DataTable.vue')),
@@ -36,45 +37,35 @@ export default {
   },
   setup(){
     const {t} = useI18n()
-    const store = useStore()
+    // const store = useStore()
     const router = useRouter()
-    const products = ref([])
-    const allKeys = ref([])
-    const isLoading = ref(true)
-    const getProducts = async () => {
-        await store.dispatch('productStore/setProducts')
-        await store.dispatch('productStore/setFields', dataFields)
-        products.value = store.getters['productStore/getProducts']
-    }
-    onMounted(() => {
-      getProducts()
+    const allKeys = getKeysFromArray(dataFields)
+
+    const {
+      updateRegister,
+      deleteRegister,
+
+      dataValues:products,
+      isLoading
+    } = useGestor({
+      pathSetValues:'productStore/setProducts',
+      pathSetFields:'productStore/setFields',
+      dataFields,
+      pathGetValues:'productStore/getProducts',
+      pathToUpdate:'update-product',
+      pathDelete:'productStore/deleteProduct'
     })
-
-    watch(products,(newProducts) => {
-      if (newProducts.length) {
-        allKeys.value = getKeysFromArray(...products.value)
-        isLoading.value = false
-      }
-    }, { immediate: true })
-
-    const updateProduct = (idProduct) => {
-      router.push({ name: 'update-product', params: { idProduct } });
-    }
-
-    const deleteProduct = async (idProduct) => {
-      await store.dispatch('productStore/deleteProduct',idProduct)
-    }
     
     return{
-        languagei18n: t,
+      languagei18n: t,
 
-        openModalProduct: () => { router.push({name:'creation-product'}) },
-        updateProduct,
-        deleteProduct,
+      openModalProduct: () => { router.push({name:'creation-product'}) },
+      updateProduct:updateRegister,
+      deleteProduct:deleteRegister,
 
-        products,
-        allKeys,
-        isLoading
+      products,
+      allKeys,
+      isLoading
     }
   }
 };

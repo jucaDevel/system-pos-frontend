@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-primary h-screen flex flex-col justify-between text-white">
+    <div class="bg-primary dark:bg-primaryDark h-screen flex flex-col justify-between text-white">
         <div class="h-16 md:h-1/6 flex justify-rigth p-1 md:p-2">
             <img class="h-full" alt="Vue logo" src="@/assets/images/logo.png">
         </div>

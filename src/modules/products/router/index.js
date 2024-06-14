@@ -3,10 +3,6 @@ export default {
     component:()=>import('@/modules/products/layouts/LayoutProducts.vue'),
     children:[
         {
-            path: '',
-            redirect: { name: 'list-product' }
-        },
-        {
             path:'list',
             name:'list-product',
             component: () => import('@/modules/products/views/ListProducts.vue')
@@ -17,10 +13,14 @@ export default {
             component: () => import('@/modules/products/views/CreationProduct.vue')
         },
         {
-            path:'update/:idProduct',
+            path:'update/:id',
             name:'update-product',
             component: () => import('@/modules/products/views/UpdateProduct.vue'),
             props: true
         }
-    ]
+    ],
+    meta: {
+        // requiresAuth: true,
+        redirectToList: true
+    }
 }

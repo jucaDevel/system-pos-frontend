@@ -2,45 +2,61 @@ import {createRegister,loadRegister, updateRegister, deleteRegister} from '@/uti
 
 
 export const saveProduct = async({commit},dataProduct) => {
-    const { name } = await createRegister('/products.json',dataProduct)
-    const dataProductSaved = {
-        id: name,
-        ...dataProduct
+    try {
+        const { name } = await createRegister('/products.json',dataProduct)
+        const dataProductSaved = {
+            id: name,
+            ...dataProduct
+        }
+    
+        commit('saveProduct',dataProductSaved)
+    } catch (error) {
+        console.log(error);
     }
-
-    commit('saveProduct',dataProductSaved)
 }
 
 export const updateProduct = async({commit},dataProduct) => {
-    const {idProduct, data} = dataProduct
-    await updateRegister(`/products/${idProduct}.json`, data)
-
-    commit('updateProduct',dataProduct)
+    try {
+        const {idProduct, data} = dataProduct
+        await updateRegister(`/products/${idProduct}.json`, data)
+    
+        commit('updateProduct',dataProduct)
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 export const deleteProduct = async({commit},idProduct) => {
+    try {
+        await deleteRegister(`/products/${idProduct}.json`)
     
-    await deleteRegister(`/products/${idProduct}.json`)
-
-    commit('deleteProduct',idProduct)
+        commit('deleteProduct',idProduct)
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export const setProducts = async({commit}) => {
-    const dataProducts = await loadRegister('/products.json')
+    try {
+        const dataProducts = await loadRegister('/products.json')
+        
+        if (!dataProducts) {
+            commit('setProducts',[])
+        }
+        const products = []
     
-    if (!dataProducts) {
+        for(let id of Object.keys(dataProducts)){
+            products.push({
+                id,
+                ...dataProducts[id]
+            })
+        }
+    
+        commit('setProducts',products)
+    } catch (error) {
+        console.error(error)
         commit('setProducts',[])
     }
-    const products = []
-
-    for(let id of Object.keys(dataProducts)){
-        products.push({
-            id,
-            ...dataProducts[id]
-        })
-    }
-
-    commit('setProducts',products)
 }
 
 export const setFields = async({commit}, dataFields) => {

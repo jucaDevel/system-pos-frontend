@@ -19,7 +19,7 @@ export default {
     const route = useRoute()
     const dataFields = ref((store.getters['productStore/getFields'].length > 0)?JSON.parse(JSON.stringify(store.getters['productStore/getFields'])):[])
     const isLoaded = ref(false)
-    const idProduct = route.params.idProduct
+    const idProduct = route.params.id
 
     const getProductById = () => {
       const dataProduct = store.getters['productStore/getProductById'](idProduct)

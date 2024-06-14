@@ -1,6 +1,6 @@
 const getKeysFromArray = ( array = [] ) => {
     try {
-        const keys = Object.keys(array).filter((element) => element != 'id')
+        const keys = Object.values(array).map((element) => element.name)
         return keys
     } catch (error) {
         console.log(error);

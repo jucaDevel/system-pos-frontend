@@ -1,9 +1,13 @@
 <template>
     <div class="flex flex-row gap-3 justify-start items-center">
         <button @click="goBack">
-            <font-awesome-icon :icon="['far', 'circle-left']" size="2xl" class="text-secondary cursor-pointer" :title="languagei18n('common.GO_BACK_SENTECE')"/>
+            <font-awesome-icon
+              :icon="['far', 'circle-left']"
+              size="2xl"
+              class="text-secondary cursor-pointer dark:text-gray-400"
+              :title="languagei18n('common.GO_BACK_SENTECE')" />
         </button>
-        <h1>{{languagei18n('common.GO_BACK_SENTECE')}}</h1>
+        <h1 class="dark:text-gray-300">{{languagei18n('common.GO_BACK_SENTECE')}}</h1>
     </div>
 </template>
 

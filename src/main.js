@@ -13,10 +13,48 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /**Icons */
-import { faBars, faMoon, faAngleDown, faChartLine, faTableList, faFilter, faBan, faPenToSquare, faFileCsv, faDownload, faChevronCircleLeft, faChevronCircleRight } from '@fortawesome/free-solid-svg-icons'
-import { faFileExcel, faFilePdf, faCircleLeft } from '@fortawesome/free-regular-svg-icons'
+import {
+  faBars,
+  faMoon,
+  faAngleDown,
+  faChartLine,
+  faTableList,
+  faFilter,
+  faBan,
+  faPenToSquare,
+  faFileCsv,
+  faDownload,
+  faChevronCircleLeft,
+  faChevronCircleRight,
+  faSun,
+  faUsers,
+  faList,
+  faUser
+} from "@fortawesome/free-solid-svg-icons";
+import { faFileExcel, faFilePdf, faCircleLeft, faCircleXmark } from '@fortawesome/free-regular-svg-icons'
 
-library.add(faBars, faMoon, faAngleDown, faChartLine, faTableList, faFilter, faBan, faPenToSquare, faFileExcel, faFilePdf, faFileCsv, faDownload, faChevronCircleLeft, faChevronCircleRight, faCircleLeft)
+library.add(
+  faBars,
+  faMoon,
+  faAngleDown,
+  faChartLine,
+  faTableList,
+  faFilter,
+  faBan,
+  faPenToSquare,
+  faFileExcel,
+  faFilePdf,
+  faFileCsv,
+  faDownload,
+  faChevronCircleLeft,
+  faChevronCircleRight,
+  faCircleLeft,
+  faSun,
+  faCircleXmark,
+  faUsers,
+  faList,
+  faUser
+);
 
 
 createApp(App)

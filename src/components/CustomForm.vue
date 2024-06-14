@@ -53,8 +53,6 @@ export default {
             formValues.value[field.name] = field.value;
           }
         });
-
-        console.log(formValues.value);
       })
 
       return{

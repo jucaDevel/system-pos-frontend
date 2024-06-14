@@ -30,6 +30,21 @@ export default {
                         name:languagei18n('modules.PRODUCTS'),
                         icon:['fas','table-list']
                     },
+                    {
+                        to:'customers',
+                        name:languagei18n('modules.CUSTOMERS'),
+                        icon:['fas','users']
+                    },
+                    {
+                        to:'categories',
+                        name:languagei18n('modules.CATEGORIES'),
+                        icon:['fas','list']
+                    },
+                    {
+                        to:'users',
+                        name:languagei18n('modules.USERS'),
+                        icon:['fas','user']
+                    },
                 ]   
             },
             { immediate: true }

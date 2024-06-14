@@ -1,6 +1,6 @@
 import { ref, computed, watch } from 'vue';
 
-const usePaginator = (values) => {
+const usePaginator = (values = []) => {
     const columnsPerPageOptions = ref([5,10,15])
     const columnsPerPage = ref(columnsPerPageOptions.value[0])
     const currentPage = ref(1)
@@ -15,6 +15,35 @@ const usePaginator = (values) => {
         return Object.values(item).some( value => String(value).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
       })
     }
+    
+    const filterDataByField = (type, searchField, searchValue) => {
+      switch (type) {
+        case 'equal':
+          dataValues.value = values.filter((value) => {
+            return String(value[searchField]).toLocaleLowerCase() === searchValue.toLocaleLowerCase()
+          })
+          break;
+        case 'contains':
+          dataValues.value = values.filter((value) => {
+            return String(value[searchField]).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
+          })
+          break;
+        case 'diferent':
+          dataValues.value = values.filter((value) => {
+            return String(value[searchField]).toLocaleLowerCase() !== searchValue.toLocaleLowerCase()
+          })
+          break;
+        case 'not_contains':
+          dataValues.value = values.filter((value) => {
+            return !String(value[searchField]).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
+          })
+          break;
+      
+        default:
+
+          break;
+      }
+    }
 
 
     /** Propiedad computada para retornar siempre los datos correspondientes con la cantidad de columnas deseada*/
@@ -26,6 +55,7 @@ const usePaginator = (values) => {
 
     const totalPages = computed(() => {
       /** Calcula la cantidad de paginas*/
+      if(dataValues.value.length == 0) return 1
       return Math.ceil(dataValues.value.length / columnsPerPage.value);
     });
 
@@ -56,7 +86,8 @@ const usePaginator = (values) => {
       paginatedValues,
       prevPage,
       nextPage,
-      filterData
+      filterData,
+      filterDataByField
     }
 }
 
