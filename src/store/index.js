@@ -3,6 +3,7 @@ import productStore from '@/modules/products/store'
 import customerStore from '@/modules/customers/store'
 import categoryStore from '@/modules/categories/store'
 import userStore from '@/modules/users/store'
+import authStore from '@/modules/auth/store'
 import i18n from '@/i18n/store'
 
 const store = createStore({
@@ -24,6 +25,7 @@ const store = createStore({
     customerStore,
     categoryStore,
     userStore,
+    authStore,
     i18n,
   }
 })

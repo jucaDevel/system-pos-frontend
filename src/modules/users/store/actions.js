@@ -1,6 +1,5 @@
 import {createRegister,loadRegister, updateRegister, deleteRegister} from '@/utils/services/crudActions'
 
-
 export const saveUser = async({commit},dataUser) => {
     try {
         const { name } = await createRegister('/users.json',dataUser)
