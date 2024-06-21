@@ -53,6 +53,10 @@ export default {
     users:{
         TITLE:"Usuarios",
         BTN_CREATE: "Añadir usuario",
+        MY_ACCOUNT: "Mi cuenta",
+        SUPPORT: "Soporte",
+        LOCK_SCREEN: "Bloquear Pantalla",
+        LOGOUT: "Cerrar Sesión"
     },
 
     modules:{

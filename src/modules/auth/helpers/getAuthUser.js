@@ -16,7 +16,8 @@ const getUserAuth = async (dataUser) => {
         else if (user.userName === dataUser.userName && user.password === dataUser.password) {
             return {
                 status: true,
-                message: 'Bienvenido'
+                message: 'Bienvenido',
+                user: {...user}
             }
         }
     }

@@ -27,17 +27,17 @@ import {
   faDownload,
   faChevronCircleLeft,
   faChevronCircleRight,
+  faChevronLeft,
   faSun,
   faUsers,
   faList,
   faUser,
   faAt,
   faLock,
-  faEye as faEyeSolid,
   faHeadset,
   faArrowRightFromBracket
 } from "@fortawesome/free-solid-svg-icons";
-import { faFileExcel, faFilePdf, faCircleLeft, faCircleXmark, faEye, faCircleUser } from '@fortawesome/free-regular-svg-icons'
+import { faFileExcel, faFilePdf, faCircleLeft, faCircleXmark, faEye, faCircleUser, faEyeSlash } from '@fortawesome/free-regular-svg-icons'
 
 library.add(
   faBars,
@@ -63,11 +63,12 @@ library.add(
   faAt,
   faLock,
   faEye,
-  faEyeSolid,
   faCircleUser,
   faHeadset,
   faArrowRightFromBracket,
-  faAngleUp
+  faAngleUp,
+  faEyeSlash,
+  faChevronLeft
 );
 
 

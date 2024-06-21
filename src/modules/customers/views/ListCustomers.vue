@@ -1,24 +1,26 @@
 <template>
   <LoaderProgress v-if="isLoading"/>
   <template v-else>
-    <data-table
-      :allValues="customers"
-      :allKeys="allKeys"
-      @on:updateRegister="updateCustomer"
-      @on:deleteRegister="deleteCustomer"
-      >
-      <template v-slot:title>
-        <h4 class="font-semibold text-lg">{{languagei18n('customers.TITLE')}}</h4>
-      </template>
-      <template v-slot:button-create>
-        <button
-          class="bg-primary p-2 rounded text-white dark:bg-primaryDark"
-          @click="openModalCustomer"
+    <div class="rounded-lg border-2 px-4 border-gray-200 dark:border-gray-600 shadow-sm w-full h-full flex flex-col justify-around">
+      <data-table
+        :allValues="customers"
+        :allKeys="allKeys"
+        @on:updateRegister="updateCustomer"
+        @on:deleteRegister="deleteCustomer"
         >
-          {{languagei18n('customers.BTN_CREATE')}}
-        </button>
-      </template>
-    </data-table>
+        <template v-slot:title>
+          <h4 class="font-semibold text-lg">{{languagei18n('customers.TITLE')}}</h4>
+        </template>
+        <template v-slot:button-create>
+          <button
+            class="bg-primary p-2 rounded text-white dark:bg-primaryDark"
+            @click="openModalCustomer"
+          >
+            {{languagei18n('customers.BTN_CREATE')}}
+          </button>
+        </template>
+      </data-table>
+    </div>
   </template>
 </template>
 

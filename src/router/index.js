@@ -4,45 +4,46 @@ import customerRouter from "@/modules/customers/router"
 import categoryRouter from '@/modules/categories/router'
 import userRouter from '@/modules/users/router'
 import authRouter from '@/modules/auth/router'
-import authGuard from "@/modules/auth/router/authGuard"
+import {authUserGuard, loginGuard} from "@/modules/auth/router/authGuard"
 
 const routes = [
   {
     path: "/",
     name: "main",
-    beforeEnter: [authGuard],
+    beforeEnter: [authUserGuard],
     component: () => import(/* webpackChunkName: "MainLayout" */ "../layouts/MainLayout.vue"),
     children:[
       {
         path: "/home",
         name:'home',
-        beforeEnter: [authGuard],
+        beforeEnter: [authUserGuard],
         component: () => import(/* webpackChunkName: "HomeView" */ "../views/HomeView.vue"),
       },
       {
         path: "/products",
-        beforeEnter: [authGuard],
+        beforeEnter: [authUserGuard],
         ...productsRouter,
       },
       {
         path: "/customers",
-        beforeEnter: [authGuard],
+        beforeEnter: [authUserGuard],
         ...customerRouter,
       },
       {
         path:"/categories",
-        beforeEnter: [authGuard],
+        beforeEnter: [authUserGuard],
         ...categoryRouter
       },
       {
         path:"/users",
-        beforeEnter: [authGuard],
+        beforeEnter: [authUserGuard],
         ...userRouter
       }
     ]
   },
   {
     path: "/auth",
+    beforeEnter: [loginGuard],
     ...authRouter,
   },
 ];

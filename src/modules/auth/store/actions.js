@@ -2,13 +2,13 @@ import getUserAuth from "../helpers/getAuthUser"
 
 export const getUserByLogin = async({commit}, dataUser) => {
     
-    const { status,message } = await getUserAuth(dataUser)
+    const { status,message, user } = await getUserAuth(dataUser)
     const token = '123456789'
     if (status) {
-        sessionStorage.setItem('user', JSON.stringify({userName: dataUser.userName}))
+        sessionStorage.setItem('user', JSON.stringify({user: user}))
         sessionStorage.setItem('token', token)
         const paramsAuth = {
-            user:dataUser.userName, 
+            user:user, 
             token
         }
         commit('setUserByLogin',paramsAuth)
@@ -36,7 +36,7 @@ export const checkAuth = async({commit}) => {
 
     try {
         const paramsAuth = {
-            user, 
+            ...user, 
             token
         }
 

@@ -47,7 +47,7 @@
                               Contraseña</label>
                             <div class="absolute inset-y-0 right-0 flex items-center justify-center px-2 cursor-pointer" @click="onShowPassword">
                                 <font-awesome-icon :icon="['far', 'eye']" size="2xl" class="text-secondary" v-if="!showPassword"/>
-                                <font-awesome-icon :icon="['fas', 'eye']" size="2xl" class="text-secondary" v-else/>
+                                <font-awesome-icon :icon="['far', 'eye-slash']" size="2xl" class="text-secondary" v-else/>
                             </div>
                         </div>
                         <div class="bg-red-300 rounded flex justify-center py-2" v-if="messageError.length > 0">

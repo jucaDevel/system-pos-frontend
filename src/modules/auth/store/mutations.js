@@ -1,4 +1,5 @@
 export const setUserByLogin = (state, {user, token}) => {
+    console.log(user);
     state.userLogged = { user: user}
     state.token = token
     state.status = 'authenticated'

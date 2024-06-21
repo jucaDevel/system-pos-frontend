@@ -17,6 +17,11 @@ export default {
             name:'update-user',
             component: () => import('@/modules/users/views/UpdateUser.vue'),
             props: true
+        },
+        {
+            path:'detail',
+            name:'detail-user',
+            component: () => import('@/modules/users/views/UserDetailAccount.vue')
         }
     ],
     meta: {

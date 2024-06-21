@@ -1,9 +1,22 @@
 import store from '@/store'
 
-const authGuard = async (to, from, next) => {
+export const authUserGuard = async (to, from, next) => {
     const { status } = await store.dispatch('authStore/checkAuth')
-    if(status) next()
-    else next({name: 'login'})
+    if(status){
+        next()
+    }
+    else {
+        next({name:'login'})
+    }
 }
 
-export default authGuard
+export const loginGuard = async (to, from, next) => {
+    const { status } = await store.dispatch('authStore/checkAuth')
+    if(status){
+        if(to.name !== 'login')next()
+        else next({name: 'main'})
+    }
+    else {
+        next()
+    }
+}

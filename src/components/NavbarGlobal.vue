@@ -16,9 +16,9 @@
                     <font-awesome-icon :icon="isDarkMode ?'fa-solid fa-sun':'fa-solid fa-moon'" size="2xl" class="text-secondary dark:text-gray-400" :title="t('common.THEME')"/>
                 </div>
                 <div class=" h-full flex justify-between mx-2 lg:mx-5" @click="onHandleInfoUser">
-                    <img class="h-full rounded-full" alt="User Image" src="@/assets/images/no-user.png">
+                    <img class="h-full rounded-full" alt="User Image" :src="urlImageUser">
                     <div class="mx-5 flex flex-wrap content-center md:gap-2 cursor-pointer hover:text-secondaryLight">
-                        <span class="text-black dark:text-white">Juan</span>
+                        <span class="text-black dark:text-white">{{name}}</span>
                         <div>
                             <font-awesome-icon :icon="['fas', 'angle-down']" class="text-black dark:text-white" v-if="!openInfoUser"/>
                             <font-awesome-icon :icon="['fas', 'angle-up']" class="text-black dark:text-white" v-else/>
@@ -37,6 +37,8 @@
 import {ref, watch, computed, defineAsyncComponent} from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useStore } from 'vuex'
+import noUserImage from '@/assets/images/no-user.png'
+
 export default {
     components:{
         InfoUserModal: defineAsyncComponent(()=> import('@/modules/users/components/InfoUserModal.vue'))
@@ -54,6 +56,8 @@ export default {
     setup(props, {emit}){
         const store = useStore()
         const isDarkMode = computed(()=>store.getters['getTheme'])
+        const userLogged = computed(()=>store.getters['authStore/getUserLogged'])
+        const { name, urlImage } = userLogged.value.user
         const openInfoUser = ref(false)
         const language = ref(props.localeLanguage)
         const {t} = useI18n()
@@ -77,6 +81,8 @@ export default {
             isDarkMode,
             t,
             language,
+            name, 
+            urlImageUser: (urlImage !== '' ) ? urlImage : noUserImage,
             changeLocaleLanguage,
             onChangeTheme,
             openInfoUser,
