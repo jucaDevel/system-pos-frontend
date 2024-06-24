@@ -5,6 +5,7 @@ const usePaginator = (values = []) => {
     const columnsPerPage = ref(columnsPerPageOptions.value[0])
     const currentPage = ref(1)
     const dataValues = ref(values)
+    const newDataValues = ref([])
 
     /** Funcion para filtrar la data*/
     const filterData = (searchValue) => {
@@ -16,33 +17,66 @@ const usePaginator = (values = []) => {
       })
     }
     
-    const filterDataByField = (type, searchField, searchValue) => {
-      switch (type) {
-        case 'equal':
-          dataValues.value = values.filter((value) => {
-            return String(value[searchField]).toLocaleLowerCase() === searchValue.toLocaleLowerCase()
-          })
-          break;
-        case 'contains':
-          dataValues.value = values.filter((value) => {
-            return String(value[searchField]).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
-          })
-          break;
-        case 'diferent':
-          dataValues.value = values.filter((value) => {
-            return String(value[searchField]).toLocaleLowerCase() !== searchValue.toLocaleLowerCase()
-          })
-          break;
-        case 'not_contains':
-          dataValues.value = values.filter((value) => {
-            return !String(value[searchField]).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
-          })
-          break;
+    // const filterDataByField = (type, searchField, searchValue) => {
+    //   switch (type) {
+    //     case 'equal':
+    //       dataValues.value = values.filter((value) => {
+    //         return String(value[searchField]).toLocaleLowerCase() === searchValue.toLocaleLowerCase()
+    //       })
+    //       break;
+    //     case 'contains':
+    //       dataValues.value = values.filter((value) => {
+    //         return String(value[searchField]).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
+    //       })
+    //       break;
+    //     case 'diferent':
+    //       dataValues.value = values.filter((value) => {
+    //         return String(value[searchField]).toLocaleLowerCase() !== searchValue.toLocaleLowerCase()
+    //       })
+    //       break;
+    //     case 'not_contains':
+    //       dataValues.value = values.filter((value) => {
+    //         return !String(value[searchField]).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
+    //       })
+    //       break;
       
-        default:
+    //     default:
 
-          break;
+    //       break;
+    //   }
+    // }
+
+    const filterDataByFields = (arrayFilters) => {
+      for (const { paramSearch,optionsSearch,searchValueOption } of arrayFilters) {
+        switch (paramSearch) {
+          case 'equal':
+            newDataValues.value = values.filter((value) => {
+              return String(value[optionsSearch]).toLocaleLowerCase() === searchValueOption.toLocaleLowerCase()
+            })
+            break;
+          case 'contains':
+            newDataValues.value = values.filter((value) => {
+              return String(value[optionsSearch]).toLocaleLowerCase().includes(searchValueOption.toLocaleLowerCase())
+            })
+            break;
+          case 'diferent':
+            newDataValues.value = values.filter((value) => {
+              return String(value[optionsSearch]).toLocaleLowerCase() !== searchValueOption.toLocaleLowerCase()
+            })
+            break;
+          case 'not_contains':
+            newDataValues.value = values.filter((value) => {
+              return !String(value[optionsSearch]).toLocaleLowerCase().includes(searchValueOption.toLocaleLowerCase())
+            })
+            break;
+        
+          default:
+            
+            break;
+        }
       }
+      
+      dataValues.value = newDataValues.value
     }
 
 
@@ -87,7 +121,7 @@ const usePaginator = (values = []) => {
       prevPage,
       nextPage,
       filterData,
-      filterDataByField
+      filterDataByFields
     }
 }
 

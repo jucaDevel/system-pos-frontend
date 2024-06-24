@@ -58,7 +58,6 @@ export default {
     };
 
     const onClickMainApp = () => {
-      console.log('Hola');
       emit('on:clickMainContainer')
     }
 
